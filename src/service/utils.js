@@ -2,7 +2,7 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
-const {TITLES, ANNOUNCES, FULL_TEXTS, CATEGORIES} = require(`./mockData`);
+const {ExitCode} = require(`./constants`);
 
 const MAX_ANNOUNCE_COUNT = 5;
 
@@ -52,15 +52,37 @@ const getRandomDate = (originalDate) => {
   }).replace(/\./g, `-`);
 };
 
-const generateOffers = (count) => (
-  Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    category: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
-    announce: shuffle(ANNOUNCES).slice(0, getRandomInt(1, MAX_ANNOUNCE_COUNT)).join(` `),
-    fullText: shuffle(FULL_TEXTS).slice(0, getRandomInt(1, FULL_TEXTS.length - 1)).join(` `),
-    createdDate: getRandomDate(new Date()),
-  }))
-);
+const getDataFromFile = async (file) => {
+  let str;
+
+  try {
+    str = await fs.readFile(file, `utf-8`);
+  } catch (err) {
+    console.error(chalk.red(`Can't read data from file`, err));
+    process.exit(ExitCode.fail);
+  }
+
+  return str.trim().split(`\n`);
+};
+
+const generateOffers = async (count) => {
+  const [TITLES, CATEGORIES, ANNOUNCES, FULL_TEXTS] = await Promise.all([
+    getDataFromFile(`data/titles.txt`),
+    getDataFromFile(`data/categories.txt`),
+    getDataFromFile(`data/sentences.txt`),
+    getDataFromFile(`data/sentences.txt`),
+  ]);
+
+  return (
+    Array(count).fill({}).map(() => ({
+      title: TITLES[getRandomInt(0, TITLES.length - 1)],
+      category: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
+      announce: shuffle(ANNOUNCES).slice(0, getRandomInt(1, MAX_ANNOUNCE_COUNT)).join(` `),
+      fullText: shuffle(FULL_TEXTS).slice(0, getRandomInt(1, FULL_TEXTS.length - 1)).join(` `),
+      createdDate: getRandomDate(new Date()),
+    }))
+  );
+};
 
 const makeMockData = async (filename, data) => {
   try {
