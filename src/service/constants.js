@@ -15,6 +15,13 @@ const HttpCode = {
   FORBIDDEN: 403,
   UNAUTHORIZED: 401,
 };
+const ResponseMessage = {
+  NOT_FOUND: `File not found`,
+  SERVER_ERROR: `Internal Server Error`,
+};
+const NodeExceptions = {
+  ENOENT: `ENOENT`,
+};
 
 module.exports = {
   DEFAULT_COMMAND,
@@ -23,4 +30,6 @@ module.exports = {
   USER_ARGV_INDEX,
   ExitCode,
   HttpCode,
+  ResponseMessage,
+  NodeExceptions,
 };

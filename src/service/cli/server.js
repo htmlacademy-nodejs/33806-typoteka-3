@@ -1,9 +1,9 @@
 'use strict';
 
-const chalk = require(`chalk`);
 const http = require(`http`);
 const fs = require(`fs`).promises;
-const {DEFAULT_PORT, MOCK_FILENAME, HttpCode} = require(`../constants`);
+const chalk = require(`chalk`);
+const {DEFAULT_PORT, MOCK_FILENAME, HttpCode, ResponseMessage, NodeExceptions} = require(`../constants`);
 
 const sendResponse = (res, statusCode, content) => {
   const template = `
@@ -24,8 +24,6 @@ const sendResponse = (res, statusCode, content) => {
 };
 
 const onClientConnect = async (req, res) => {
-  const notFoundMessageText = `Not found`;
-
   switch (req.url) {
     case `/`:
       try {
@@ -34,12 +32,18 @@ const onClientConnect = async (req, res) => {
         const content = mocks.map((post) => `<li>${post.title}</li>`).join(``);
         sendResponse(res, HttpCode.OK, `<ul>${content}</ul>`);
       } catch (err) {
-        sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
+        if (err.code === NodeExceptions.ENOENT) {
+          sendResponse(res, HttpCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
+          return;
+        }
+
+        sendResponse(res, HttpCode.INTERNAL_SERVER_ERROR, ResponseMessage.SERVER_ERROR);
+        console.log(chalk.red(`Server Error: `, err));
       }
 
       break;
     default:
-      sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
+      sendResponse(res, HttpCode.NOT_FOUND, ResponseMessage.NOT_FOUND);
       break;
   }
 };
