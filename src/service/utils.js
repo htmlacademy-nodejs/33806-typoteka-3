@@ -22,7 +22,6 @@ const shuffle = (array) => {
   return array;
 };
 
-// TODO: чужой код; понять что здесь происходит либо заменить на moment.js
 const getDaysInMonth = (m, y) => {
   if (m === 2) {
     return !((y % 4) || (!(y % 100) && (y % 400))) ? 29 : 28;
