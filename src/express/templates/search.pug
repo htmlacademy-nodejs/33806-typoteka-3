@@ -1,0 +1,15 @@
+extends ./layout/base
+block vars
+  - var classes = ['wrapper-color']
+block header
+  include ./_partials/header-menu
+block content
+  main
+    section.search-page
+      .search-page__wrapper
+        h1 Поиск
+        .search.search-page__form
+          form(action='#', method='get')
+            label
+              input(type='text', placeholder='Что ищем?')
+            button.search__button.button.button--transparent(type='submit') Найти
