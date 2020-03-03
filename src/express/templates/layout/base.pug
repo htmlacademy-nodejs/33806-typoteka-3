@@ -1,0 +1,13 @@
+doctype html
+html(lang='ru')
+  block head
+    include ../_partials/head
+  body
+    block vars
+      - var classes = ['wrapper']
+    div(class=classes)
+      block header
+        include ../_partials/header
+      block content
+      block footer
+        include ../_partials/footer
