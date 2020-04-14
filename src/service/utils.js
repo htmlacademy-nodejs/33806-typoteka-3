@@ -2,6 +2,7 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
+const nanoid = require(`nanoid`).nanoid;
 const {ExitCode} = require(`./constants`);
 
 const MAX_ANNOUNCE_COUNT = 5;
@@ -65,20 +66,26 @@ const getDataFromFile = async (file) => {
 };
 
 const generateOffers = async (count) => {
-  const [TITLES, CATEGORIES, ANNOUNCES, FULL_TEXTS] = await Promise.all([
+  const [TITLES, CATEGORIES, ANNOUNCES, FULL_TEXTS, COMMENTS] = await Promise.all([
     getDataFromFile(`data/titles.txt`),
     getDataFromFile(`data/categories.txt`),
     getDataFromFile(`data/sentences.txt`),
     getDataFromFile(`data/sentences.txt`),
+    getDataFromFile(`data/comments.txt`)
   ]);
 
   return (
     Array(count).fill({}).map(() => ({
+      id: nanoid(),
       title: TITLES[getRandomInt(0, TITLES.length - 1)],
       category: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
       announce: shuffle(ANNOUNCES).slice(0, getRandomInt(1, MAX_ANNOUNCE_COUNT)).join(` `),
       fullText: shuffle(FULL_TEXTS).slice(0, getRandomInt(1, FULL_TEXTS.length - 1)).join(` `),
       createdDate: getRandomDate(new Date()),
+      comments: shuffle(COMMENTS).slice(0, getRandomInt(1, COMMENTS.length - 1)).map((comment) => ({
+        id: nanoid(),
+        text: comment,
+      })),
     }))
   );
 };
