@@ -6,7 +6,7 @@ async function requireRoutes({app, fullPath, dirName}) {
   try {
     const paths = await fs.readdir(fullPath, `utf-8`);
     paths.forEach((fileName) => {
-      const router = require(`${dirName}/${fileName}`);
+      const router = require(`${dirName}/${fileName}/${fileName}-routes.js`);
       const path = fileName.replace(/\.js/, ``);
       app.use(`/${path}`, router);
     });

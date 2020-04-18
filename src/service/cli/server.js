@@ -1,7 +1,7 @@
 'use strict';
 
 const {DEFAULT_PORT} = require(`../constants`);
-const app = require(`./app/app`);
+const app = require(`./app`);
 
 module.exports = {
   name: `--server`,

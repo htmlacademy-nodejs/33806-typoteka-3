@@ -3,7 +3,7 @@
 const fs = require(`fs`).promises;
 const express = require(`express`);
 const app = express();
-const {MOCK_FILENAME, HttpCode, ResponseMessage, NodeExceptions} = require(`../../constants`);
+const {MOCK_FILENAME, HttpCode, ResponseMessage, NodeExceptions} = require(`src/service/constants`);
 
 const dbMiddleware = async (req, res, next) => {
   try {
