@@ -3,7 +3,7 @@
 module.exports = {
   verbose: false,
   clearMocks: true,
-  maxConcurrency: 1,
+  maxConcurrency: 5,
   collectCoverage: false,
   moduleDirectories: [
     `node_modules`
