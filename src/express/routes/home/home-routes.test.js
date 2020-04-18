@@ -1,12 +1,12 @@
 'use strict';
 
 const request = require(`supertest`);
-const app = require(`../../index`);
+const app = require(`../../server`);
 
-describe.skip(`Main Page end-point`, () => {
-  test(`When get / status code should be 200`, function (done) {
-    request(app)
-      .get(`/`)
-      .expect(200, done);
+describe(`Home Page end-point`, () => {
+  it(`get / with status code 200`, async (done) => {
+    const response = await request(app).get(`/`);
+    expect(response.status).toBe(200);
+    done();
   });
 });

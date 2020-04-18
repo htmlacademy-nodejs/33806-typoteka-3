@@ -1,12 +1,12 @@
 'use strict';
 
 const request = require(`supertest`);
-const app = require(`../../index`);
+const app = require(`../../server`);
 
 describe(`Register API end-points`, () => {
-  test(`When get /register code should be 200`, function (done) {
-    request(app)
-      .get(`/register`)
-      .expect(200, done);
+  it(`get /register with status code 200`, async (done) => {
+    const response = await request(app).get(`/register`);
+    expect(response.status).toBe(200);
+    done();
   });
 });

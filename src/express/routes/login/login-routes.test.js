@@ -1,12 +1,12 @@
 'use strict';
 
 const request = require(`supertest`);
-const app = require(`../../index`);
+const app = require(`../../server`);
 
 describe(`Login API end-points`, () => {
-  it(`When get /login status code should be 200`, function (done) {
-    request(app)
-      .get(`/login`)
-      .expect(200, done);
+  it(`get /login with status code 200`, async (done) => {
+    const response = await request(app).get(`/login`);
+    expect(response.status).toBe(200);
+    done();
   });
 });
