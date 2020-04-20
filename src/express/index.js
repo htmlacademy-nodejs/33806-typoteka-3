@@ -1,17 +1,12 @@
 'use strict';
 
-const express = require(`express`);
-const path = require(`path`);
+const app = require(`./server`);
+const {getLogger} = require(`./logger`);
+const logger = getLogger();
 const DEFAULT_PORT = 8080;
-const app = express();
-const {requireRoutes} = require(`./utils`);
 
-app.set(`view engine`, `pug`);
-app.set(`views`, path.join(__dirname + `/templates`));
-app.use(express.static(path.join(__dirname + `/public`)));
-
-app.get(`/`, (req, res) => res.render(`main`));
-requireRoutes({app, fullPath: `src/express/routes`, dirName: `./routes`});
-
-app.listen(DEFAULT_PORT,
-    () => console.log(`Server is running at: ${DEFAULT_PORT}`));
+app.listen(DEFAULT_PORT, () => {
+  logger.info(`Server running on port ${DEFAULT_PORT}`);
+}).on(`error`, (err) => {
+  logger.error(`Server can't start. Error: ${err}`);
+});
