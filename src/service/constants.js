@@ -2,6 +2,7 @@
 
 require(`dotenv`).config();
 
+const API_PREFIX = `/api`;
 const DEFAULT_COMMAND = `--help`;
 const DEFAULT_PORT = process.env.SERVER_PORT;
 const MOCK_FILENAME = `mocks.json`;
@@ -28,6 +29,7 @@ const NodeExceptions = {
 };
 
 module.exports = {
+  API_PREFIX,
   DEFAULT_COMMAND,
   DEFAULT_PORT,
   MOCK_FILENAME,
