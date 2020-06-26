@@ -1,9 +1,10 @@
 'use strict';
 
+require(`dotenv`).config();
 const app = require(`./server`);
 const {getLogger} = require(`./logger`);
 const logger = getLogger();
-const DEFAULT_PORT = 8080;
+const DEFAULT_PORT = process.env.FRONTEND_PORT;
 
 app.listen(DEFAULT_PORT, () => {
   logger.info(`Server running on port ${DEFAULT_PORT}`);

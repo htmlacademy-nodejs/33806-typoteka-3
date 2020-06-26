@@ -1,7 +1,9 @@
 'use strict';
 
+require(`dotenv`).config();
+
 const DEFAULT_COMMAND = `--help`;
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = process.env.SERVER_PORT;
 const MOCK_FILENAME = `mocks.json`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
