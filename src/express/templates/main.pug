@@ -1,10 +1,13 @@
 extends ./layout/base
+include ./_partials/header
 include ./_partials/tags
 include ./_partials/hot
 include ./_partials/last-comments
 include ./_partials/main-preview
 block vars
   - var classes = ['wrapper', 'hello']
+block header
+  +header()
 block content
   main.main-page
     h1.visually-hidden Главная страница личного блога Типотека
@@ -15,8 +18,8 @@ block content
     else
       +tags(categories)
       div(class=(comments || stories)
-              ? "main-page__section-flex"
-              : "main-page__section-flex main-page__section-flex--short"
+        ? "main-page__section-flex"
+        : "main-page__section-flex main-page__section-flex--short"
       )
         +hot()
         +lastComments()

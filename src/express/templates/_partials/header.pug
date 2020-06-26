@@ -1,7 +1,37 @@
-header.header
-  a.header__logo.logo(href='/')
-    img.logo__image(src='/img/icons/logo-image-only.svg', alt='логотип Тайпотеки')
-    span.logo__name Типотека
+include ./nav
+mixin header(user)
+  header.header
+    a.header__logo.logo(href='/')
+      img.logo__image(src='/img/icons/logo-image-only.svg', alt='логотип Тайпотеки')
+      span.logo__name Типотека
+
+    if user === 'admin'
+      button.button.button--colored.header__button-new Новая запись
+      a(href='#').header__dropdown
+        a(href='#').button.button--burger.header__burger Открыть меню
+        ul.navigation.header__navigation
+          li.navigation__item
+            a(href='/register') Регистраци
+          li.navigation__item
+            a(href='/my') Мои записи
+          li.navigation__item
+            a(href='/admin/categories') Админка категории
+          li.navigation__item
+            a(href='/admin/commentaries') Админка комментарии
+          li.navigation__item
+            a(href='/admin/new') Админка новая запись
+          li.navigation__item
+            a(href='/article/1') Страница поcта (для пользователя)
+          li.navigation__item
+            a(href='/articles/category') Список публикаций в категории
+          li.navigation__item
+            a(href='cdcdd') 404
+          li.navigation__item
+            a(href='/search') Поиск
+
     block nav
-      include ./nav
-  a.header__search.button.button--search(href='/search', aria-label='поиск по сайту')
+      +nav(user)
+    if user && user !== admin
+      a(href='/').header__avatar.avatar
+        img.logo__image(src='/img/avatar-2.png', alt='аватар пользователя')
+    a.header__search.button.button--search(href='/search', aria-label='поиск по сайту')
