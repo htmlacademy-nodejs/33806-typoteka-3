@@ -8,7 +8,7 @@ module.exports = (app, service) => {
   app.use(`/articles`, route);
 
   route.get(`/:articleID/comments`, (req, res) => {
-    const comments = service.findAll(req.params.articleID);
+    const comments = service.findAll(req.params.articleID, req.query.commentsCount);
 
     if (comments.length) {
       return res.json(comments);

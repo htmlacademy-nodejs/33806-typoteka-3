@@ -5,11 +5,11 @@ class CommentsService {
     this._articles = articles;
   }
 
-  findAll(articleID) {
+  findAll(articleID, commentsCount) {
     const post = this._articles.filter((article) => article.id === articleID)[0];
 
     if (post) {
-      return post.comments;
+      return post.comments.slice(0, commentsCount);
     }
 
     return [];

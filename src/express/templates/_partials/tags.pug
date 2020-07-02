@@ -1,9 +1,10 @@
 mixin tags(categories)
   section.main-page__theme-list
     h2.visually-hidden Список тем
-    ul.themes
-      each category in categories
-        li.themes__item
-          a.themes__item-link(href="/category/" + category)
-            span= category
-            sup 88
+    if categories
+      ul.themes
+        each category in categories
+          li.themes__item
+            a.themes__item-link(href="/articles/category/1")
+              span= category
+              sup 88

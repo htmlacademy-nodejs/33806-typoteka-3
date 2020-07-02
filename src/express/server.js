@@ -10,6 +10,8 @@ app
   .set(`views`, path.join(__dirname + `/templates`))
   .use(express.static(path.join(__dirname + `/public`)))
   .use(`/`, routes)
+  .use((req, res) => res.status(400).render(`errors/400`))
+  .use((err, req, res) => res.status(500).render(`errors/500`))
   .disable(`x-powered-by`);
 
 module.exports = app;

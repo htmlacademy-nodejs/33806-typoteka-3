@@ -2,12 +2,12 @@ mixin nav(user)
   nav.header__nav
     ul.header__nav-list
       li.header__list-item
-        if user
+        if user && user !== 'admin'
           p Алёна Фролова
-        else
+        if !user
           a.header__registration(href='/register') Регистрация
       li.header__list-item
         if user
           a.header__exit(href='/login') Выйти
-        else
+        if !user
           a.header__enter(href='/login') Вход с паролем

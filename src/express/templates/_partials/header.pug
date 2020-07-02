@@ -5,7 +5,7 @@ mixin header(user)
       img.logo__image(src='/img/icons/logo-image-only.svg', alt='логотип Тайпотеки')
       span.logo__name Типотека
 
-    if user === 'admin'
+    if user
       button.button.button--colored.header__button-new Новая запись
       a(href='#').header__dropdown
         a(href='#').button.button--burger.header__burger Открыть меню

@@ -2,7 +2,7 @@
 
 const {Router} = require(`express`);
 const homeRouter = Router(); // eslint-disable-line new-cap
-const api = require(`../../api`);
+const api = require(`../api`);
 
 homeRouter.get(`/`, async (req, res) => {
   try {

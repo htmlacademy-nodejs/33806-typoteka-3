@@ -5,10 +5,9 @@ const api = require(`./config`);
 const articles = {
   get: () => api(`/articles`),
   add: (params) => api(`/articles/add`, params),
-  update: (articleID, params) => api(`/articles/edit/${articleID}`, params),
+  edit: (articleID) => api(`/articles/edit/${articleID}`),
+  getArticle: (articleID) => api(`/articles/${articleID}`),
 };
-
-const auth = {};
 
 const categories = {
   get: () => api(`/categories`)
@@ -16,7 +15,8 @@ const categories = {
 
 const my = {
   get: () => api(`/articles`),
-  getComments: (articleID) => api(`/api/articles/${articleID}/comments`),
+  post: (articleID) => api(`/articles/${articleID}`),
+  getComments: (articleID, commentsCount) => api(`/articles/${articleID}/comments?commentsCount=${commentsCount}`),
 };
 
 const search = {
@@ -25,7 +25,6 @@ const search = {
 
 module.exports = {
   articles,
-  auth,
   categories,
   my,
   search,
