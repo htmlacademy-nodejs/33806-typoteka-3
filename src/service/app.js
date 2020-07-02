@@ -10,6 +10,7 @@ const logger = require(`pino-http`)({
 
 app
   .use(express.urlencoded({extended: false}))
+  .use(express.json())
   .use(logger)
   .use(API_PREFIX, routes)
   .disable(`x-powered-by`);

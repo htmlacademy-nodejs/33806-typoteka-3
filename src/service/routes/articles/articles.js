@@ -23,14 +23,14 @@ module.exports = (app, articleService) => {
   });
 
   route.post(`/add`, async (req, res) => {
-    if (req.query.title) {
-      const newPost = await articleService.add(req.query);
+    if (req.body.name) {
+      const newPost = await articleService.add(req.body);
       return res.json(newPost);
     }
 
     return res.status(HttpCode.BAD_REQUEST).json({
       message: ResponseMessage.BAD_REQUEST,
-      details: `The title is not set`
+      details: `The name is not set`
     });
   });
 

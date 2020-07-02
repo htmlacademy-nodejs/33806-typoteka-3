@@ -6,8 +6,9 @@ include ./_partials/last-comments
 include ./_partials/main-preview
 block vars
   - var classes = ['wrapper', 'hello']
+  - var user = 'admin'
 block header
-  +header()
+  +header(user)
 block content
   main.main-page
     h1.visually-hidden Главная страница личного блога Типотека

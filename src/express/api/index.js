@@ -4,7 +4,7 @@ const api = require(`./config`);
 
 const articles = {
   get: () => api(`/articles`),
-  add: (params) => api(`/articles/add`, params),
+  add: (body) => api(`/articles/add`, body, `POST`),
   edit: (articleID) => api(`/articles/edit/${articleID}`),
   getArticle: (articleID) => api(`/articles/${articleID}`),
 };

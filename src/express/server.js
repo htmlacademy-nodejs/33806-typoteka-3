@@ -8,6 +8,7 @@ const routes = require(`./routes`);
 app
   .set(`view engine`, `pug`)
   .set(`views`, path.join(__dirname + `/templates`))
+  .use(express.urlencoded({extended: true}))
   .use(express.static(path.join(__dirname + `/public`)))
   .use(`/`, routes)
   .use((req, res) => res.status(400).render(`errors/400`))

@@ -6,8 +6,8 @@ mixin header(user)
       span.logo__name Типотека
 
     if user
-      button.button.button--colored.header__button-new Новая запись
-      a(href='#').header__dropdown
+      a(href='/articles/add').button.button--colored.header__button-new Новая запись
+      .header__dropdown
         a(href='#').button.button--burger.header__burger Открыть меню
         ul.navigation.header__navigation
           li.navigation__item
@@ -19,8 +19,6 @@ mixin header(user)
           li.navigation__item
             a(href='/admin/commentaries') Админка комментарии
           li.navigation__item
-            a(href='/admin/new') Админка новая запись
-          li.navigation__item
             a(href='/article/1') Страница поcта (для пользователя)
           li.navigation__item
             a(href='/articles/category') Список публикаций в категории
@@ -31,7 +29,7 @@ mixin header(user)
 
     block nav
       +nav(user)
-    if user && user !== admin
+    if user && user !== 'admin'
       a(href='/').header__avatar.avatar
         img.logo__image(src='/img/avatar-2.png', alt='аватар пользователя')
     a.header__search.button.button--search(href='/search', aria-label='поиск по сайту')

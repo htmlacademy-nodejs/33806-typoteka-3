@@ -8,18 +8,21 @@ block content
         .new-publication
           .new-publication__header
             h1 Новая публикация
+            form(action='/articles/add', method='post')
+              input(type='text', name='name', placeholder='login', value=login)
+              button(type='submit') Submit
             .new-publication__date-form
               h3 Дата публикации
-              form(action='#', method='POST')
+              form(action='/articles/add', method='post')
                 .new-publication__date-block
                   label(for='new-publication-date', aria-label='Календарь')
-                  input#new-publication-date(type='text', name='login', placeholder='21.03.2019')
-            button.new-publication__button.button.button--colored(type='submit') Опубликовать
+                  input#new-publication-date(type='text', name='date', placeholder='21.03.2019')
+            button(type='submit').new-publication__button.button.button--colored Опубликовать
           button.popup__button.button.button--popup-close(type='button', aria-label='Закрыть окно')
             | Закрыть
             | окно
           .new-publication__form.form
-            form(action='#', method='get')
+            form(action='/articles/add', method='post')
               .form__wrapper.form__wrapper--intro
                 .form__field
                   label
