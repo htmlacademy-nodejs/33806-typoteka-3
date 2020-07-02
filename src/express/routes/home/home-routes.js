@@ -8,6 +8,7 @@ homeRouter.get(`/`, async (req, res) => {
   try {
     const articles = await api.articles.get().then((data) => data.json());
     const categories = await api.categories.get().then((data) => data.json());
+
     res.render(`main`, {articles, categories});
   } catch (error) {
     console.error(error);
