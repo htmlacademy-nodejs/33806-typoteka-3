@@ -7,7 +7,7 @@ const article = require(`./article`);
 const categories = require(`./categories`);
 const comments = require(`./comments`);
 const search = require(`./search`);
-const {ArticlesService, ArticleService, CommentsService, CategoriesService, SearchService} = require(`../data-service`);
+const {ArticlesService, ArticleService, CommentsService, CategoriesService, SearchService} = require(`../models`);
 const getMockData = require(`../lib/get-mock-data`);
 
 (async () => {

@@ -8,8 +8,8 @@
     "start": "node ./src/service/service.js",
     "start-front-server": "LOG_LEVEL=error nodemon ./src/express/index.js",
     "start-front-server::debug": "LOG_LEVEL=debug nodemon ./src/express/index.js | pino-pretty",
-    "test::rest": "jest",
-    "test": "npm run server & npm run test::rest",
+    "test::frontend": "jest ./src/express",
+    "test": "npm run server & npm run test::frontend",
     "eslint": "eslint --ext .js src/",
     "generate": "npm run start -- --generate 10",
     "develop": "npm run generate && npm run server & npm run start-front-server"
