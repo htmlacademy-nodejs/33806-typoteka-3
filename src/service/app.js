@@ -2,10 +2,10 @@
 
 const express = require(`express`);
 const app = express();
-const routes = require(`../routes`);
-const {API_PREFIX} = require(`../constants`);
+const routes = require(`./routes`);
+const {API_PREFIX} = require(`./constants`);
 const logger = require(`pino-http`)({
-  logger: require(`../logger`).getLogger()
+  logger: require(`./logger`).getLogger()
 });
 
 app
