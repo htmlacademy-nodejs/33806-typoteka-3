@@ -1,5 +1,7 @@
 'use strict';
 
+const nanoid = require(`nanoid`).nanoid;
+
 class ArticlesService {
   constructor(articles) {
     this._articles = articles;
@@ -13,8 +15,8 @@ class ArticlesService {
     return this._articles.filter((article) => article.id === articleID)[0];
   }
 
-  add() {
-    return {id: 1, title: `New Post`};
+  add(data) {
+    return {...data, id: nanoid()};
   }
 
   edit(articleID) {

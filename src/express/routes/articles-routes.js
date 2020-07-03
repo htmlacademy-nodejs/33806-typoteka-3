@@ -1,22 +1,27 @@
 'use strict';
 
+const path = require(`path`);
 const {Router} = require(`express`);
+const multer = require(`multer`);
 const articlesRouter = Router(); // eslint-disable-line new-cap
 const api = require(`../api`);
+
+const upload = multer({dest: path.resolve(__dirname, `../../uploads`)});
 
 articlesRouter
   .get(`/category/:id`, (req, res) => res.render(`articles-by-category`))
   .get(`/add`, (req, res) => res.render(`admin/new-post`))
-  .post(`/add`, async (req, res) => {
+  .post(`/add`, upload.single(`file`), async (req, res) => {
     try {
-      const response = await api.articles.add(req.body);
+      const response = await api.articles.add({...req.body, file: req.file}).then((data) => data.json());
 
-      if (response.ok) {
-        return res.redirect(`/`);
+      if (response.id) {
+        return res.redirect(`/my`);
       }
 
       return res.render(`admin/new-post`, req.body);
     } catch (e) {
+      console.log(`e`, e);
       return res.render(`admin/new-post`, req.body);
     }
   })

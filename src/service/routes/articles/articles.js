@@ -23,7 +23,7 @@ module.exports = (app, articleService) => {
   });
 
   route.post(`/add`, async (req, res) => {
-    if (req.body.name) {
+    if (req.body) {
       const newPost = await articleService.add(req.body);
       return res.json(newPost);
     }
