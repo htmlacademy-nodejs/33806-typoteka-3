@@ -20,7 +20,7 @@ const my = {
 };
 
 const search = {
-  get: (params) => api(`/search`, params),
+  post: (params) => api(`/search`, params, `POST`),
 };
 
 module.exports = {

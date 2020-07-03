@@ -1,6 +1,4 @@
 extends ../layout/base
-block nav
-  include ../_partials/nav-menu
 block content
   main
     section.modal.modal--flex
@@ -8,9 +6,6 @@ block content
         .new-publication
           .new-publication__header
             h1 Новая публикация
-            form(action='/articles/add', method='post')
-              input(type='text', name='name', placeholder='login', value=login)
-              button(type='submit') Submit
             .new-publication__date-form
               h3 Дата публикации
               form(action='/articles/add', method='post')
@@ -22,7 +17,7 @@ block content
             | Закрыть
             | окно
           .new-publication__form.form
-            form(action='/articles/add', method='post')
+            form(action='/articles/add', method='post', enctype='multipart/form-data')
               .form__wrapper.form__wrapper--intro
                 .form__field
                   label
