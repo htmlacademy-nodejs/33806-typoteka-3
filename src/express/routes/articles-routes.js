@@ -6,7 +6,7 @@ const multer = require(`multer`);
 const articlesRouter = Router(); // eslint-disable-line new-cap
 const api = require(`../api`);
 
-const upload = multer({dest: path.resolve(__dirname, `../../uploads`)});
+const upload = multer({dest: path.resolve(__dirname, `../../../uploads`)});
 
 articlesRouter
   .get(`/category/:id`, (req, res) => res.render(`articles-by-category`))

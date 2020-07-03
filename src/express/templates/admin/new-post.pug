@@ -1,45 +1,49 @@
 extends ../layout/base
+
 block content
   main
     section.modal.modal--flex
       .popup.popup--new-publication.popup--flex
-        .new-publication
+        form(action='/articles/add', method='post', enctype='multipart/form-data').new-publication
           .new-publication__header
             h1 Новая публикация
             .new-publication__date-form
               h3 Дата публикации
-              form(action='/articles/add', method='post')
-                .new-publication__date-block
-                  label(for='new-publication-date', aria-label='Календарь')
-                  input#new-publication-date(type='text', placeholder='21.03.2019', name='createdDate')
+              .new-publication__date-block
+                label(for='new-publication-date', aria-label='Календарь')
+                input#new-publication-date(type='text', placeholder='21.03.2019', name='createdDate')
             button(type='submit').new-publication__button.button.button--colored Опубликовать
           button.popup__button.button.button--popup-close(type='button', aria-label='Закрыть окно')
             | Закрыть
             | окно
           .new-publication__form.form
-            form(action='/articles/add', method='post', enctype='multipart/form-data')
-              .form__wrapper.form__wrapper--intro
-                .form__field
+            .form__wrapper.form__wrapper--intro
+              .form__field
+                label
+                  input(type='text', placeholder='Заголовок', required='', name='title', value=title)
+              .form__field.form__field--post-image
+                label
+                  input#image-name-field(type='text', placeholder='Фотография', readonly='')
+                .form__image-loader.form__image-loader--publication
                   label
-                    input(type='text', placeholder='Заголовок', required='', name='title', value=title)
-                .form__field.form__field--post-image
-                  label
-                    input#image-name-field(type='text', placeholder='Фотография', readonly='')
-                  .form__image-loader.form__image-loader--publication
-                    label
-                      input.visually-hidden(type='file', name='file')
-                      | Обзор
-                a.new-publication__form-link.button.button--transparent(href='#') Добавить категорию
-              .form__wrapper.form__wrapper--text
-                .form__field.form__field--publication-text
-                  label
-                    textarea(rows='1', placeholder='Анонс публикации', name='announce')
-                      | #{announce}
-                .form__field.form__field--publication-text
-                  label
-                    textarea(rows='1', placeholder='Полный текст публикации', name='fullText')
-                      | #{fullText}
+                    input.visually-hidden(type='file', name='file')
+                    | Обзор
+              a.new-publication__form-link.button.button--transparent(href='#') Добавить категорию
+            .form__wrapper.form__wrapper--text
+              .form__field.form__field--publication-text
+                label
+                  textarea(rows='1', placeholder='Анонс публикации', name='announce')
+                    | #{announce}
+              .form__field.form__field--publication-text
+                label
+                  textarea(rows='1', placeholder='Полный текст публикации', name='fullText')
+                    | #{fullText}
       .modal__overlay
 block scripts
-  script(src='js/vendor.js')
-  script(src='js/main.js')
+  script(src='/js/vendor.js')
+  script(src='/js/main.js')
+  script.
+    var closeButton = document.getElementsByClassName(`button--popup-close`)[0];
+    closeButton.addEventListener(`click`, function () {
+      window.location.href = window.location.origin;
+    });

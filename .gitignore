@@ -17,8 +17,8 @@ node_modules/
 build/
 
 # Загрузки
-src/uploads/*
-!src/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
 
 # jest
 coverage

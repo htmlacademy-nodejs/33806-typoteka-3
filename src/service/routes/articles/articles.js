@@ -3,6 +3,7 @@
 const {Router} = require(`express`);
 const {HttpCode, ResponseMessage} = require(`../../constants`);
 const route = new Router();
+const articleValidator = require(`../../middlewares/article-validator`);
 
 module.exports = (app, articleService) => {
   app.use(`/articles`, route);
@@ -22,7 +23,7 @@ module.exports = (app, articleService) => {
     return res.status(HttpCode.NOT_FOUND).json({message: ResponseMessage.NOT_FOUND});
   });
 
-  route.post(`/add`, async (req, res) => {
+  route.post(`/add`, articleValidator, async (req, res) => {
     if (req.body) {
       const newPost = await articleService.add(req.body);
       return res.json(newPost);
