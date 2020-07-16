@@ -16,5 +16,9 @@ node_modules/
 # Папка с собранными файлами проекта
 build/
 
+# Загрузки
+uploads/*
+!uploads/.gitkeep
+
 # jest
 coverage

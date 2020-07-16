@@ -1,7 +1,10 @@
 'use strict';
 
+require(`dotenv`).config();
+
+const API_PREFIX = `/api`;
 const DEFAULT_COMMAND = `--help`;
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = process.env.SERVER_PORT;
 const MOCK_FILENAME = `mocks.json`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
@@ -26,6 +29,7 @@ const NodeExceptions = {
 };
 
 module.exports = {
+  API_PREFIX,
   DEFAULT_COMMAND,
   DEFAULT_PORT,
   MOCK_FILENAME,

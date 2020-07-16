@@ -1,3 +1,4 @@
+include ../_partials/header
 doctype html
 html(lang='ru')
   block head
@@ -7,7 +8,7 @@ html(lang='ru')
       - var classes = ['wrapper']
     div(class=classes)
       block header
-        include ../_partials/header
+        +header()
       block content
       block footer
         include ../_partials/footer

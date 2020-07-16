@@ -1,0 +1,27 @@
+extends ../layout/base
+include ../_partials/comments
+block content
+  main
+    section.post
+      h1.visually-hidden Пост
+      section.post__content
+        h2.visually-hidden Основное содержание
+        .post__wrapper
+          .post__head
+            a.post__backwards.button.button--backwards(href='/') Назад
+            time.post__date(datetime='2019-03-21T20:33')= article.createdDate
+            h2.post__title.title.title--main= article.title
+            ul.post__themes.themes
+              if article.category
+                each cat in article.category
+                  li.themes__item
+                    a.themes__item-link(href='/articles/category/1')
+                      span= cat
+                      sup 88
+                    button.themes__remove-btn(type='button') Удалить категорию
+          .post__picture
+            img(src='/img/sea-fullsize@1x.jpg', alt='пейзаж море, скалы, пляж')
+          .post__text
+            h3= article.announce
+            p= article.fullText
+      +comments(article.comments)
